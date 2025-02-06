@@ -24,40 +24,50 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
-//==============================Data_Type===========================
-struct sinhVien{
-    string ten, ngay_sinh, que_quan;
-    double gpa;
-    void output(){
-        cout << ten << ' ' << ngay_sinh << ' ' << que_quan << ' ' << gpa << endl;;
-    }
-};
 
 //==============================Call================================
-void out(sinhVien a);
-void in(sinhVien &b);
+string dao_nguoc(string a);
+string tong(string a, string b);
 
 //==============================Code================================
 int main(){
     fast();
-    sinhVien x;
-    sinhVien y = {"dang loc tai", "20/07/2004", "quang nam" , 3.2};
-    in(x);
-    x.output();
-    out(y);
+    string a, b; cin >> a >> b;
+    if(a.length() > b.length() || a.length() == b.length() && a > b){
+        cout << tong(a, b);
+    }
+    else{
+        cout << tong(b, a);
+    }
     return 0;
 }
 
 //==============================Function============================
-void out(sinhVien a){
-    cout << a.ten << ' ' << a.ngay_sinh << ' ' << a.que_quan << ' ' << a.gpa << endl;
+string dao_nguoc(string a){
+    string t;
+    for(int i = a.length() - 1; i >= 0; i--){
+        t += a[i];
+    }
+    return t;
 }
 
-void in(sinhVien &b){
-    getline(cin, b.ten);
-    cin >> b.ngay_sinh;
-    cin.ignore();
-    getline(cin, b.que_quan);
-    cin >> b.gpa;
+string tong(string a, string b){
+    a = dao_nguoc(a); b = dao_nguoc(b);
+    a += "0";
+    string c;
+    for(int i = b.length(); i < a.length(); i++){
+        b += '0';
+    }
+    int t, nho = 0;
+    for(int i = 0; i < a.length(); i++){
+        t = a[i] - '0' + b[i] - '0' + nho;
+        nho = t / 10;
+        t = t  % 10;
+        c += (t + '0');
+    }
+    if(c[c.length() - 1] == '0'){
+        c.erase(c.length() - 1);
+    }
+    c = dao_nguoc(c);
+    return c;
 }
-
