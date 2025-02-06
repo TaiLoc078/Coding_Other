@@ -44,11 +44,16 @@ struct sinhVien{
 
 struct SoPhuc{
     int thuc, ao;
-    SoPhuc operator + (SoPhuc other){
-        SoPhuc res;
-        res.thuc = thuc + other.thuc;
-        res.ao = ao + other.ao;
-        return res;
+    friend istream &operator >> (istream &in, SoPhuc &x){
+        in >> x.thuc >> x.ao;
+        return in;
+    }
+    friend ostream &operator << (ostream &out, SoPhuc x){
+        out << x.thuc << "+" << x.ao << "i" << endl;
+        return out;
+    }
+    friend bool operator == (SoPhuc a, SoPhuc b){
+        return a.thuc == b.thuc && a.ao == b.ao;
     }
 };
 
@@ -58,6 +63,7 @@ void in(sinhVien &b);
 long long ucln(long long a, long long b);
 void xuat(SoPhuc a);
 SoPhuc sum_sophuc(SoPhuc a, SoPhuc b);
+SoPhuc operator + (SoPhuc a, SoPhuc b);
 
 //==============================Code================================
 int main(){
@@ -68,8 +74,14 @@ int main(){
     // in(y);
     // out(y);
     SoPhuc a = {1, 2}, b = {8, 9};
-    SoPhuc c = a + b;
-    xuat(c);
+    SoPhuc c = a + b; //Goi ham bang toan tu cong la mot cach khac
+    cout << c << endl;
+    if(a == b){
+        cout << "1";
+    }
+    else{
+        cout << "0";
+    }
     return 0;
 }
 
@@ -92,6 +104,13 @@ void xuat(SoPhuc a){
 }
 
 SoPhuc sum_sophuc(SoPhuc a, SoPhuc b){
+    SoPhuc res;
+    res.thuc = a.thuc + b.thuc;
+    res.ao = a.ao + b.ao;
+    return res;
+}
+
+SoPhuc operator + (SoPhuc a, SoPhuc b){
     SoPhuc res;
     res.thuc = a.thuc + b.thuc;
     res.ao = a.ao + b.ao;
