@@ -3,6 +3,9 @@
 #include <iostream>
 #include <iomanip>
 #include <math.h>
+#include <string>
+#include <sstream>
+
 
 
 using namespace std;
@@ -64,6 +67,9 @@ long long ucln(long long a, long long b);
 void xuat(SoPhuc a);
 SoPhuc sum_sophuc(SoPhuc a, SoPhuc b);
 SoPhuc operator + (SoPhuc a, SoPhuc b);
+string tuoi(sinhVien a);
+bool cmp(sinhVien a, sinhVien b);
+
 
 //==============================Code================================
 int main(){
@@ -73,14 +79,25 @@ int main(){
     // out(x);
     // in(y);
     // out(y);
-    SoPhuc a = {1, 2}, b = {8, 9};
-    SoPhuc c = a + b; //Goi ham bang toan tu cong la mot cach khac
-    cout << c << endl;
-    if(a == b){
-        cout << "1";
+    // SoPhuc a = {1, 2}, b = {8, 9};
+    // SoPhuc c = a + b; //Goi ham bang toan tu cong la mot cach khac
+    // cout << c << endl;
+    // if(a == b){
+    //     cout << "1";
+    // }
+    // else{
+    //     cout << "0";
+    // }
+    vector<sinhVien> v;
+    int n; cin >> n;
+    cin.ignore();
+    for(int i = 0; i < n; i++){
+        sinhVien tmp; in(tmp);
+        v.push_back(tmp);
     }
-    else{
-        cout << "0";
+    sort(v.begin(), v.end(), cmp);
+    for(int i = 0; i < n; i++){
+        out(v[i]);
     }
     return 0;
 }
@@ -115,6 +132,19 @@ SoPhuc operator + (SoPhuc a, SoPhuc b){
     res.thuc = a.thuc + b.thuc;
     res.ao = a.ao + b.ao;
     return res;
+}
+
+string tuoi(string s){
+    stringstream ss(s);
+    string tmp, res = "";
+    while(getline(ss, tmp, '/')){
+        res = tmp + res;
+    }
+    return res;
+}
+
+bool cmp(sinhVien a, sinhVien b){
+    return tuoi(a.ngay_sinh) < tuoi(b.ngay_sinh);
 }
 
 long long ucln(long long a, long long b){
