@@ -27,17 +27,38 @@ typedef unsigned long long ull;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
 //==============================Data_Type===========================
-
+struct phanSo{
+    ll tu, mau;
+    friend istream &operator >> (istream &cin, phanSo &x){
+        cin >> x.tu >> x.mau;
+        return cin;
+    }
+    friend ostream &operator << (ostream &cout, phanSo x){
+        cout << x.tu << '/' << x.mau;
+        return cout;
+    }
+};
 
 //==============================Call================================
-
+ll ucln(phanSo x);
 
 
 //==============================Code================================
 int main(){
     fast();
-    
+    phanSo x;
+    cin >> x;
+    ll common = ucln(x);
+    x.tu = x.tu / common; x.mau = x.mau / common;
+    cout << x;
 }
 
 //==============================Function============================
-
+ll ucln(phanSo x){
+    while(x.mau != 0){
+        ll du = x.tu % x.mau;
+        x.tu = x.mau;
+        x.mau = du;
+    }
+    return x.tu;
+}
