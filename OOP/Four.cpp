@@ -17,6 +17,19 @@ string chuanHoa(string s){
 	return s;
 }
 
+string chTen(string s){
+	stringstream ss(s);
+	string tmp, word = "";
+	while(getline(ss, tmp, ' ')){
+		tmp[0] = toupper(tmp[0]);
+		for(int i = 1; i < tmp.size(); i++){
+			tmp[i] = tolower(tmp[i]);
+		}
+		word = word + tmp + " ";
+	}
+	return word;
+}
+
 istream &operator >> (istream &cin, nhanVien &x){
 	getline(cin, x.ten);
 	cin >> x.gt >> x.ns; cin.ignore();
@@ -27,7 +40,7 @@ istream &operator >> (istream &cin, nhanVien &x){
 }
 
 ostream &operator << (ostream &cout, nhanVien x){
-	cout << "00001" << ' ' << x.ten << ' ' << x.gt << ' ' << chuanHoa(x.ns) << ' ' << x.dchi << ' ' << x.mst << ' ' << chuanHoa(x.hdong);
+	cout << "00001" << ' ' << chTen(x.ten) << x.gt << ' ' << chuanHoa(x.ns) << ' ' << x.dchi << ' ' << x.mst << ' ' << chuanHoa(x.hdong);
 	return cout;
 }
 
