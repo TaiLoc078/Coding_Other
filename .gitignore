@@ -15,3 +15,5 @@
 /f/*.exe
 /g/*.exe
 /h/*.exe
+/stack/*.exe
+/file/*.exe
